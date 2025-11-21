@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone } from "lucide-react";
+import { Phone,ChevronDown} from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar({ onDashboardClick }: { onDashboardClick: () => void }) {
@@ -18,7 +18,7 @@ export default function Navbar({ onDashboardClick }: { onDashboardClick: () => v
 
           <li className="relative group cursor-pointer">
             <span className="flex items-center gap-1 hover:text-blue-700">
-              Services ▼
+              Services <ChevronDown className="w-4 h-4" />
             </span>
 
             <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-md top-6 left-0 w-64 p-3 z-50 border">
