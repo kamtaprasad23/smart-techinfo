@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import ThankYouPage from "@/src/components/thankyouPage";
 
-
 // Reusable Booking Summary
 function BookingSummary() {
   return (
@@ -70,7 +69,6 @@ function BookingSummary() {
   );
 }
 
-
 export default function BookPage() {
   const [step, setStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -82,11 +80,11 @@ export default function BookPage() {
       </h1>
 
       {/* TOP STEPS TRACK */}
-      <div className="flex items-center justify-center gap-6 mb-10">
+      <div className="flex items-center justify-center gap-4 sm:gap-6 mb-10">
         {[1, 2, 3].map((no, idx) => (
           <div key={no} className="flex items-center gap-2">
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold ${
                 step >= no ? "bg-[#202a3a] text-white" : "bg-gray-300"
               }`}
             >
@@ -95,7 +93,7 @@ export default function BookPage() {
 
             {idx < 2 && (
               <div
-                className={`h-1 w-20 ${
+                className={`h-1 w-12 sm:w-20 ${
                   step >= no + 1 ? "bg-[#0C1B33]" : "bg-gray-300"
                 }`}
               ></div>
@@ -106,12 +104,11 @@ export default function BookPage() {
 
       {/* STEP 1 */}
       {step === 1 && (
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* FORM 2/3 */}
-          <div className="col-span-2 p-10 border border-gray-300 rounded-xl shadow space-y-6">
+          <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-6">
             <h2 className="text-3xl mb-4">Personal Details</h2>
 
-            {/* FULL NAME */}
             {[
               { icon: User, label: "Full Name", type: "text" },
               { icon: Mail, label: "Email Address", type: "email" },
@@ -124,7 +121,7 @@ export default function BookPage() {
                 </label>
                 <input
                   type={field.type}
-                  className="w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
+                  className="w-full md:w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
                   placeholder={`Enter ${field.label.toLowerCase()}`}
                 />
               </div>
@@ -138,17 +135,14 @@ export default function BookPage() {
               </label>
               <input
                 type="text"
-                className="w-2/3 h-40 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
+                className="w-full md:w-2/3 h-40 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
                 placeholder="Enter service address"
               />
             </div>
 
             <div className="flex justify-between mt-6">
-              <button
-                disabled
-                className="flex px-6 py-3 rounded-lg opacity-40 cursor-not-allowed"
-              >
-                <ArrowLeft/>
+              <button disabled className="flex px-6 py-3 rounded-lg opacity-40 cursor-not-allowed">
+                <ArrowLeft />
                 Back
               </button>
               <button
@@ -166,9 +160,8 @@ export default function BookPage() {
 
       {/* STEP 2 */}
       {step === 2 && (
-        <div className="grid grid-cols-3 gap-8">
-          {/* LEFT 2/3 */}
-          <div className="col-span-2 p-10 border border-gray-300 rounded-xl shadow space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-8">
             <h2 className="text-3xl mb-4">Schedule Service</h2>
 
             {/* DATE */}
@@ -179,7 +172,7 @@ export default function BookPage() {
               </label>
               <input
                 type="date"
-                className="w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
+                className="w-full md:w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100"
               />
             </div>
 
@@ -190,7 +183,7 @@ export default function BookPage() {
                 Select Time Slot
               </label>
 
-              <div className="grid grid-cols-2 gap-3 w-2/3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-2/3">
                 {[
                   "9:00 AM – 11:00 AM",
                   "11:00 AM – 1:00 PM",
@@ -221,7 +214,7 @@ export default function BookPage() {
 
               <textarea
                 rows={5}
-                className="w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100 resize-none"
+                className="w-full md:w-2/3 border border-gray-300 rounded-lg px-3 py-2 outline-none bg-gray-100 resize-none"
                 placeholder="Describe the issue you're facing"
               ></textarea>
 
@@ -235,7 +228,7 @@ export default function BookPage() {
                 onClick={() => setStep(1)}
                 className="flex px-6 py-3 rounded-lg"
               >
-                <ArrowLeft/>
+                <ArrowLeft />
                 Back
               </button>
 
@@ -243,7 +236,8 @@ export default function BookPage() {
                 onClick={() => setStep(3)}
                 className="bg-[#0C1B33] text-white px-6 py-3 rounded-lg"
               >
-Continue              </button>
+                Continue
+              </button>
             </div>
           </div>
 
@@ -253,16 +247,15 @@ Continue              </button>
 
       {/* STEP 3 */}
       {step === 3 && (
-        <div className="grid grid-cols-3 gap-8">
-          {/* LEFT 2/3 */}
-          <div className="col-span-2 p-10 border border-gray-300 rounded-xl shadow space-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-10">
             <h2 className="text-3xl mb-4">Payment Method</h2>
 
             {["cash", "online"].map((method) => (
               <button
                 key={method}
                 onClick={() => setPaymentMethod(method)}
-                className="w-2/3 flex items-start gap-3 px-5 py-4 rounded-lg border border-gray-300"
+                className="w-full md:w-2/3 flex items-start gap-3 px-5 py-4 rounded-lg border border-gray-300"
               >
                 <div
                   className={`w-5 h-5 rounded-full border-2 mt-4 ${
@@ -286,7 +279,7 @@ Continue              </button>
             ))}
 
             {/* SECURED PAYMENT BOX */}
-            <div className="ml-7 mt-2 w-sm flex justify-center h-14 border border-dashed border-blue-400 bg-blue-50 text-blue-700 p-2 rounded-md text-xs">
+            <div className="ml-0 md:ml-7 mt-2 w-full md:w-auto flex justify-center h-14 border border-dashed border-blue-400 bg-blue-50 text-blue-700 p-2 rounded-md text-xs">
               Secured Payment by Smart Assured
             </div>
 
@@ -295,7 +288,7 @@ Continue              </button>
                 onClick={() => setStep(2)}
                 className="flex px-6 py-3 rounded-lg"
               >
-                <ArrowLeft/>
+                <ArrowLeft />
                 Back
               </button>
 
@@ -315,4 +308,3 @@ Continue              </button>
     </div>
   );
 }
-

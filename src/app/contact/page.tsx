@@ -23,22 +23,22 @@ export default function Page() {
   ];
 
   return (
-    <div className="min-h-screen p-6 bg-white text-black">
+    <div className="min-h-screen p-4 md:p-6 bg-white text-black">
 
       {/* Page Heading */}
-      <h1 className="text-5xl font-bold text-center my-8">
+      <h1 className="text-3xl md:text-5xl font-bold text-center my-8">
         Help & Support
       </h1>
 
-      <p className="text-gray-600 text-lg text-center p-3">
+      <p className="text-gray-600 text-base md:text-lg text-center p-3">
         We're here to help! Find answers to common questions or reach out to our support team.
       </p>
 
       {/* Support Cards */}
-      <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
 
         {/* Card 1 */}
-        <div className="w-80 mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
+        <div className="w-full mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
                         text-white p-6 flex flex-col items-center text-center">
           <Phone size={40} className="mb-4" />
           <h2 className="text-xl font-semibold mb-3">Call Support</h2>
@@ -49,7 +49,7 @@ export default function Page() {
         </div>
 
         {/* Card 2 */}
-        <div className="w-80 mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
+        <div className="w-full mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
                         text-white p-6 flex flex-col items-center text-center">
           <Mail size={40} className="mb-4" />
           <h2 className="text-xl font-semibold mb-3">Email Us</h2>
@@ -60,7 +60,7 @@ export default function Page() {
         </div>
 
         {/* Card 3 */}
-        <div className="w-80 mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
+        <div className="w-full mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-[#11202D] to-[#2D5679]
                         text-white p-6 flex flex-col items-center text-center">
           <MessageSquare size={40} className="mb-4" />
           <h2 className="text-xl font-semibold mb-3">Live Chat</h2>
@@ -72,10 +72,10 @@ export default function Page() {
       </div>
 
       {/* FAQ and Contact Form */}
-      <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 p-5 rounded-xl">
+      <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 p-3 md:p-5 rounded-xl">
 
         {/* FAQ Section (2/3 width) */}
-        <div className="md:col-span-2 space-y-4 border border-gray-300 rounded p-6">
+  <div className="col-span-1 md:col-span-2 space-y-4 border border-gray-300 rounded p-6">
           <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
 
           <div className="space-y-3">
@@ -92,7 +92,7 @@ export default function Page() {
         </div>
 
         {/* Contact Form (1/3 width) */}
-        <div className="bg-white p-6 border border-gray-300 rounded-xl">
+        <div className="bg-white p-4 md:p-6 border border-gray-300 rounded-xl">
           <h2 className="text-xl font-bold mb-4">Send us a Message</h2>
 
           {/* Name */}
@@ -135,68 +135,62 @@ export default function Page() {
             className="w-full mt-1 mb-6 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 resize-none bg-gray-100"
           ></textarea>
 
-         <span className="flex justify-end">
- {/* Send Button */}
-          <button className="bg-[#11202D] text-white p-2 rounded-lg transition">
-            Send
-          </button>
-
-
-         </span>
+          <div className="flex justify-end">
+            <button className="bg-[#11202D] text-white px-5 py-2 rounded-lg transition">
+              Send
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Common Issues Section */}
       <div className="mt-10">
-        <h2 className="font-semibold text-[#11202D] text-5xl flex justify-center">
+        <h2 className="font-semibold text-[#11202D] text-3xl md:text-5xl flex justify-center text-center">
           Common Issues & Solutions
         </h2>
 
         <div className="w-full mt-12 bg-gradient-to-br from-[#11202D] to-[#2D5679]
-                        rounded-xl p-8 text-white flex justify-between">
+                        rounded-xl p-6 md:p-8 text-white grid grid-cols-1 md:grid-cols-3 gap-6">
 
           {/* Issue Box 1 */}
-          <div className="space-y-3 p-3">
-            <h3 className="text-3xl">Booking Issues</h3>
-            <p className="text-sm text-gray-400">
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl">Booking Issues</h3>
+            <p className="text-sm text-gray-300">
               Having trouble booking a service? <br />
               Make sure you have logged in and all required <br />
               fields are filled correctly.
             </p>
-
-            <div className="text-xl mt-6">
-              <p className="cursor-pointer hover:underline">Try booking again</p>
-            </div>
+            <p className="text-lg mt-5 cursor-pointer hover:underline">
+              Try booking again
+            </p>
           </div>
 
           {/* Issue Box 2 */}
-          <div className="space-y-3 p-3">
-            <h3 className="text-3xl">Payment Issues</h3>
-            <p className="text-sm text-gray-400">
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl">Payment Issues</h3>
+            <p className="text-sm text-gray-300">
               Payment not going through? <br />
               Try a different payment method <br />
               or contact your bank for online <br />
               payment issues.
             </p>
-
-            <div className="text-xl mt-6">
-              <p className="cursor-pointer hover:underline">Contact support</p>
-            </div>
+            <p className="text-lg mt-5 cursor-pointer hover:underline">
+              Contact support
+            </p>
           </div>
 
           {/* Issue Box 3 */}
-          <div className="space-y-3 p-3">
-            <h3 className="text-3xl">Booking Issues</h3>
-            <p className="text-sm text-gray-400">
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl">Booking Issues</h3>
+            <p className="text-sm text-gray-300">
               Want to know the status of your booking? <br />
               Check your dashboard for real-time <br />
               updates and technician <br />
               details.
             </p>
-
-            <div className="text-xl mt-6">
-              <p className="cursor-pointer hover:underline">Go to dashboard</p>
-            </div>
+            <p className="text-lg mt-5 cursor-pointer hover:underline">
+              Go to dashboard
+            </p>
           </div>
         </div>
       </div>
