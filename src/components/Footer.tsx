@@ -14,62 +14,74 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
 
         {/* Logo & About */}
-        <div>
+        <div
+          className="transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]"
+        >
           <div className="flex items-center gap-3 mb-4">
             <img
               src="/LOGO1.png"
               alt="Smart Service"
-              className="w-12 h-12 rounded-full bg-white"
+              className="w-12 h-12 rounded-full bg-white shadow-md shadow-blue-900/40"
             />
             <h2 className="text-xl font-semibold text-white">Smart Service</h2>
           </div>
 
           <p className="text-sm leading-relaxed">
-            Professional home appliance and
-            electronics repair services.
+            Professional home appliance and electronics repair services.
             <br />
-            Quality assured, trusted by
-            thousands.
+            Quality assured, trusted by thousands.
           </p>
 
           <div className="flex items-center gap-4 mt-4 md:hidden">
-            <a href="#" className="hover:text-white" aria-label="Facebook">
-              <Facebook className="w-5 h-5" />
-            </a>
-            <a href="#" className="hover:text-white" aria-label="Twitter">
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="hover:text-white" aria-label="Instagram">
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a href="#" className="hover:text-white" aria-label="LinkedIn">
-              <Linkedin className="w-5 h-5" />
-            </a>
+            {/** Social Icons Animated */}
+            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                className="hover:text-white transition-all duration-300 hover:scale-125"
+              >
+                <Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
         </div>
 
         {/* Quick Links */}
-        <div>
+        <div
+          className="transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]"
+        >
           <h3 className="text-white font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li className="cursor-pointer hover:text-white">About Us</li>
-            <li className="cursor-pointer hover:text-white">Our Services</li>
+            <li className="cursor-pointer hover:text-white hover:translate-x-2 duration-200">
+              About Us
+            </li>
+            <li className="cursor-pointer hover:text-white hover:translate-x-2 duration-200">
+              Our Services
+            </li>
           </ul>
         </div>
 
         {/* Services */}
-        <div>
+        <div
+          className="transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]"
+        >
           <h3 className="text-white font-semibold mb-4">Services</h3>
           <ul className="space-y-2 text-sm">
-            <li className="cursor-pointer hover:text-white">Washing Machine</li>
-            <li className="cursor-pointer hover:text-white">Refrigerator</li>
-            <li className="cursor-pointer hover:text-white">Air Conditioner</li>
-            <li className="cursor-pointer hover:text-white">Television</li>
+            {["Washing Machine", "Refrigerator", "Air Conditioner", "Television"].map((service, i) => (
+              <li
+                key={i}
+                className="cursor-pointer hover:text-white hover:translate-x-2 duration-200"
+              >
+                {service}
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contact */}
-        <div>
+        <div
+          className="transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]"
+        >
           <h3 className="text-white font-semibold mb-4">Contact Us</h3>
 
           <div className="flex items-center gap-3 mb-2">
@@ -94,23 +106,23 @@ export default function Footer() {
       {/* Bottom Strip */}
       <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-gray-400">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
           <p className="text-center md:text-left">
             © 2025 Smart Service. All rights reserved.
           </p>
+
           <div className="hidden md:flex items-center gap-4">
-              <a href="#" className="hover:text-white" aria-label="Facebook">
-                <Facebook className="w-5 h-5" />
+            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                className="hover:text-white transition-all duration-300 hover:scale-125"
+              >
+                <Icon className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-white" aria-label="Twitter">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-white" aria-label="Instagram">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-white" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
-              </a>
+            ))}
           </div>
+
         </div>
       </div>
     </footer>
