@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   User,
@@ -12,7 +13,6 @@ import {
 } from "lucide-react";
 import ThankYouPage from "@/src/components/thankyouPage";
 
-// ⭐ SERVICE PRICE LIST (dynamic)
 const serviceCharges: Record<string, number> = {
   "AC Repair": 499,
   "TV Repair": 399,
@@ -21,7 +21,6 @@ const serviceCharges: Record<string, number> = {
 
 const visitCharge = 149;
 
-// ⭐⭐⭐ BOOKING SUMMARY (DYNAMIC)
 function BookingSummary({
   service,
   address,
@@ -40,7 +39,6 @@ function BookingSummary({
 
       <div className="space-y-2">
         <label className="text-sm font-medium">Service</label>
-
         <select
           className="w-full p-3 border border-gray-300 rounded-md"
           value={service}
@@ -56,12 +54,10 @@ function BookingSummary({
       <hr className="border-gray-300" />
 
       <div className="space-y-2">
-        <label className="text-sm font-medium">Service Address</label>
-
+        <label className="text-sm font-medium">Address</label>
         <textarea
           rows={3}
           className="w-full p-3 border border-gray-300 rounded-md resize-none"
-          placeholder="Enter your address"
           value={address}
           readOnly
         />
@@ -69,25 +65,18 @@ function BookingSummary({
 
       <hr className="border-gray-300" />
 
-      {/* ⭐ DYNAMIC SERVICE CHARGE */}
       <div className="flex justify-between items-center">
         <span className="text-xl font-medium">Service Charge</span>
-        <span className="text-green-600 font-bold text-lg">
-          ₹{serviceCharge}
-        </span>
+        <span className="text-green-600 font-bold">₹{serviceCharge}</span>
       </div>
 
-      {/* ⭐ DYNAMIC VISIT CHARGE */}
       <div className="flex justify-between items-center">
         <span className="text-xl font-medium">Visit Charge</span>
-        <span className="text-green-600 font-bold text-lg">
-          ₹{visitCharge}
-        </span>
+        <span className="text-green-600 font-bold">₹{visitCharge}</span>
       </div>
 
       <hr className="border-gray-300" />
 
-      {/* ⭐ DYNAMIC TOTAL */}
       <div className="flex justify-between text-lg font-semibold">
         <span>Total</span>
         <span>₹{total}</span>
@@ -117,7 +106,6 @@ export default function BookPage() {
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [done, setDone] = useState(false);
 
-  // ⭐ FINAL SUBMIT
   const handleBookingSubmit = async () => {
     try {
       if (!fullName || !phone || !address || !service) {
@@ -143,14 +131,13 @@ export default function BookPage() {
         body: formData,
       });
 
-      const data = await res.json();
+      const result = await res.json();
 
-      if (!res.ok) {
-        alert(data.message || "Booking failed.");
+      if (!result.success) {
+        alert(result.message || "Booking failed.");
         return;
       }
 
-      alert("Booking Successful!");
       setDone(true);
     } catch (err) {
       console.error(err);
@@ -166,7 +153,7 @@ export default function BookPage() {
         Book Your Service
       </h1>
 
-      {/* Steps */}
+      {/* --- Step Progress Indicator --- */}
       <div className="flex items-center justify-center gap-4 sm:gap-6 mb-10">
         {[1, 2, 3].map((no, idx) => (
           <div key={no} className="flex items-center gap-2">
@@ -189,7 +176,7 @@ export default function BookPage() {
         ))}
       </div>
 
-      {/* STEP 1 */}
+      {/* --- STEP 1 --- */}
       {step === 1 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-6">
@@ -261,7 +248,7 @@ export default function BookPage() {
         </div>
       )}
 
-      {/* STEP 2 */}
+      {/* --- STEP 2 --- */}
       {step === 2 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-10">
@@ -325,8 +312,7 @@ export default function BookPage() {
                 onClick={() => setStep(1)}
                 className="flex px-6 py-3 rounded-lg"
               >
-                <ArrowLeft />
-                Back
+                <ArrowLeft /> Back
               </button>
 
               <button
@@ -346,7 +332,7 @@ export default function BookPage() {
         </div>
       )}
 
-      {/* STEP 3 */}
+      {/* --- STEP 3 --- */}
       {step === 3 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-2 p-5 md:p-10 border border-gray-300 rounded-xl shadow space-y-10">
@@ -367,7 +353,7 @@ export default function BookPage() {
                 ></div>
 
                 <div>
-                  <p className="font-semibold text-lg flex justify-start">
+                  <p className="font-semibold text-lg">
                     {method === "cash" ? "Cash on Service" : "Pay Online"}
                   </p>
                   <p className="text-sm text-gray-600">
@@ -384,15 +370,14 @@ export default function BookPage() {
                 onClick={() => setStep(2)}
                 className="flex px-6 py-3 rounded-lg"
               >
-                <ArrowLeft />
-                Back
+                <ArrowLeft /> Back
               </button>
 
               <button
                 onClick={handleBookingSubmit}
                 className="bg-[#0C1B33] text-white px-6 py-3 rounded-lg"
               >
-                Continue
+                Submit Booking
               </button>
             </div>
           </div>

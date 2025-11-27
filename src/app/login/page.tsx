@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface LoginProps {
   onClose: () => void;
-  onLoginSuccess: () => void; // keep your prop
+  onLoginSuccess: () => void;
   onOpenSignup: () => void;
 }
 
@@ -15,14 +15,20 @@ export default function LoginPage({
   onOpenSignup,
 }: LoginProps) {
   const router = useRouter();
+  const params = useSearchParams();
+
   const [isVisible, setIsVisible] = useState(false);
 
-  // NEW: States for email + password
+  // States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  // Auto Popup Fix
   useEffect(() => {
-    setTimeout(() => setIsVisible(true), 10);
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 50);
   }, []);
 
   const handleClose = () => {
@@ -32,11 +38,19 @@ export default function LoginPage({
     }, 250);
   };
 
-  // ⭐ NEW: LOGIN API CALL
+  // ⭐ LOGIN API CALL
   const handleLogin = async () => {
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      setLoading(true);
+
+      const res = await fetch("/api/auth/login", {
         method: "POST",
+        credentials: "include", // ⭐ cookie allow
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
@@ -45,30 +59,40 @@ export default function LoginPage({
 
       if (!res.ok) {
         alert(data.message || "Login failed");
+        setLoading(false);
         return;
       }
 
-      // Save token + user in localStorage
+      // ⭐ Save user + token in localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      onLoginSuccess(); 
-      onClose();
-    } catch (error) {
-      console.error(error);
+      setLoading(false);
+      onLoginSuccess();  
+      handleClose();
+
+    } catch (err) {
+      console.error(err);
       alert("Something went wrong");
+      setLoading(false);
     }
   };
 
   return (
     <div
       onClick={handleClose}
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center 
+        bg-black/60 p-4 transition-opacity duration-300 
+        ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-full max-w-4xl bg-white/10 backdrop-blur-xl shadow-xl rounded-xl flex flex-col md:flex-row p-6 md:p-10 border border-white/20 transition-all duration-300 ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
+        className={`relative w-full max-w-4xl bg-white/10 backdrop-blur-xl shadow-xl 
+        rounded-xl flex flex-col md:flex-row p-6 md:p-10 border border-white/20 
+        transition-all duration-300
+        ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
       >
+        {/* CLOSE BTN */}
         <button
           onClick={handleClose}
           className="absolute top-3 right-3 text-white text-3xl font-bold cursor-pointer"
@@ -92,38 +116,45 @@ export default function LoginPage({
             We truly value your trust.
           </h2>
 
+          {/* EMAIL */}
           <label className="text-xs sm:text-sm font-medium flex items-center gap-2 mb-1">
-            <span>📧</span> Email address
+            📧 Email Address
           </label>
           <input
             type="email"
-            placeholder="Your email@gmail.com"
+            placeholder="your@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-transparent border border-white/50 rounded-lg px-3 py-2 sm:px-4 sm:py-3 mb-4 focus:outline-none focus:border-white"
           />
 
+          {/* PASSWORD */}
           <label className="text-xs sm:text-sm font-medium flex items-center gap-2 mb-1">
-            <span>🔒</span> Password
+            🔒 Password
           </label>
           <input
             type="password"
-            placeholder="Password*****"
+            placeholder="*********"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full bg-transparent border border-white/50 rounded-lg px-3 py-2 sm:px-4 sm:py-3 mb-3 focus:outline-none focus:border-white"
           />
 
+          {/* SIGNUP LINK */}
           <p className="text-xs sm:text-sm mb-6 text-center md:text-left">
             Don’t have an account?{" "}
-            <button onClick={onOpenSignup} className="underline">Create An Account</button>
+            <button onClick={onOpenSignup} className="underline">
+              Create An Account
+            </button>
           </p>
 
+          {/* LOGIN BTN */}
           <button
             onClick={handleLogin}
-            className="w-full bg-black/60 hover:bg-black text-white font-semibold py-2 sm:py-3 rounded-full"
+            disabled={loading}
+            className="w-full bg-black/60 hover:bg-black text-white font-semibold py-2 sm:py-3 rounded-full transition-all"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </div>
       </div>
