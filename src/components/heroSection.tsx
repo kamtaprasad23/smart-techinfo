@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-
 export default function HeroSection() {
   return (
     <section
@@ -23,16 +22,21 @@ export default function HeroSection() {
         </h1>
 
         <div className="flex gap-4 mt-6">
-         <Link href="/Book">
-  <button className="bg-[#0C1B33] px-6 py-3 rounded-xl text-white font-semibold border border-white cursor-pointer">
-    Book Now
-  </button>
-</Link>
 
-<Link href="/contact">
-          <button className="bg-transparent border border-white px-6 py-3 rounded-xl text-white cursor-pointer">
-            Enquire Now
-          </button></Link>
+          <Link href="/Book">
+            <button className="bg-[#0C1B33] px-6 py-3 rounded-xl text-white font-semibold border border-white cursor-pointer 
+              transition-all duration-300 hover:bg-[#16294d] hover:shadow-lg hover:scale-105 active:scale-95">
+              Book Now
+            </button>
+          </Link>
+
+          <Link href="/contact">
+            <button className="bg-transparent border border-white px-6 py-3 rounded-xl text-white cursor-pointer 
+              transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg hover:scale-105 active:scale-95">
+              Enquire Now
+            </button>
+          </Link>
+
         </div>
       </div>
     </section>
